@@ -1,8 +1,10 @@
 package Proyecto_final;
 
+import conexion.Usuarios;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.Connection;
 
 /**
  *
@@ -20,7 +22,9 @@ public class Principal extends JFrame implements ActionListener {
     private JComboBox combo_departamento;
     private JScrollPane scroll;
     String nombre = "";
-
+    private Usuarios CP = new Usuarios();
+    Connection cn;
+    
     public Principal() {
         setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -213,11 +217,13 @@ public class Principal extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == mi_calculo) {
+            String nombre = input_nombre.getText();
             String nombre_trabajador = input_nombre.getText();
             String a_paterno = input_a_paterno.getText();
             String a_materno = input_a_materno.getText();
             String departamento = combo_departamento.getSelectedItem().toString();
-
+            CP.insertDatosP(nombre);
+            
             if (nombre_trabajador.equals("") || a_paterno.equals("") || a_materno.equals("") || departamento.equals("")) {
                 JOptionPane.showMessageDialog(null, "Debes de llenar todos los campos");
             } else {
