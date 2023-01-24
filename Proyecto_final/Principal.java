@@ -17,8 +17,8 @@ public class Principal extends JFrame implements ActionListener {
     private JMenu m_opciones, m_calcular, m_acerca_de, m_color_fondo;
     private JMenuItem mi_calculo, mi_verde, mi_rosa, mi_naranja, mi_doctor, mi_salir, mi_nuevo;
     private JLabel label_logo, label_bienvenido, label_title, label_paterno, label_materno, label_nombre,
-            label_departamento, label_resultado, label_footer, label_qr;
-    private JTextField input_nombre, input_a_paterno, input_a_materno;
+            label_departamento, label_resultado, label_footer, label_qr, label_telefono, label_municipio;
+    private JTextField input_nombre, input_a_paterno, input_a_materno, input_telefono, input_municipio;
     private JComboBox combo_departamento;
     private JScrollPane scroll;
     String nombre = "";
@@ -158,6 +158,32 @@ public class Principal extends JFrame implements ActionListener {
         input_a_materno.setFont(new Font("Andale Mono", 1, 14));
         input_a_materno.setForeground(new Color(9, 47, 84));
         add(input_a_materno);
+        
+        label_telefono = new JLabel("Telefono:");
+        label_telefono.setBounds(25, 365, 180, 25);
+        label_telefono.setFont(new Font("Andale Mono", 1, 12));
+        label_telefono.setForeground(new Color(255, 255, 255));
+        add(label_telefono);
+        
+        input_telefono = new JTextField();
+        input_telefono.setBounds(25, 390, 150, 25);
+        input_telefono.setBackground(new Color(224, 224, 224));
+        input_telefono.setFont(new Font("Andale Mono", 1, 14));
+        input_telefono.setForeground(new Color(9, 47, 84));
+        add(input_telefono);
+        
+        label_municipio = new JLabel("Municipio:");
+        label_municipio.setBounds(220, 250, 180, 25);
+        label_municipio.setFont(new Font("Andale Mono", 1, 12));
+        label_municipio.setForeground(new Color(255, 255, 255));
+        add(label_municipio);
+        
+        input_municipio = new JTextField();
+        input_municipio.setBounds(220, 275, 150, 25);
+        input_municipio.setBackground(new Color(224, 224, 224));
+        input_municipio.setFont(new Font("Andale Mono", 1, 14));
+        input_municipio.setForeground(new Color(9, 47, 84));
+        add(input_municipio);
 
         label_departamento = new JLabel("Ingreso al Area:");
         label_departamento.setBounds(220, 188, 180, 25);
@@ -222,9 +248,11 @@ public class Principal extends JFrame implements ActionListener {
             String a_paterno = input_a_paterno.getText();
             String a_materno = input_a_materno.getText();
             String departamento = combo_departamento.getSelectedItem().toString();
-            CP.insertDatosP(nombre);
+            String telefono = input_telefono.getText();
+            String municipio = input_municipio.getText();
+            CP.insertDatosP(nombre, municipio, telefono, a_paterno, a_materno);
             
-            if (nombre_trabajador.equals("") || a_paterno.equals("") || a_materno.equals("") || departamento.equals("")) {
+            if (nombre_trabajador.equals("") || a_paterno.equals("") || a_materno.equals("") || departamento.equals("") || telefono.equals("") || municipio.equals("")) {
                 JOptionPane.showMessageDialog(null, "Debes de llenar todos los campos");
             } else {
                 if (departamento.equals("Algologia")) {
